@@ -31,4 +31,5 @@ pipeline {
                 }
             }
         }
-    }
+    } // Cierre del bloque 'stages'
+} // Cierre del bloque 'pipeline'
