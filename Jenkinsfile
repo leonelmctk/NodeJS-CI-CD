@@ -1,16 +1,35 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:latest'
-            args '-u root:root' // Asegúrate de tener permisos necesarios
-        }
-    }
+    agent any
+
     stages {
-        stage('Install Dependencies') {
+        stage('Checkout') {
             steps {
-                sh 'npm install'
+                git 'https://github.com/<nombre del repositorio>.git'
             }
         }
-        // Otras etapas...
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    echo 'Installing dependencies...'
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                script {
+                    echo 'Running tests...'
+                    sh 'npm test'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    echo 'Building the application...'
+                    // Agregar cualquier paso de construcción necesario
+                }
+            }
+        }
     }
 }
