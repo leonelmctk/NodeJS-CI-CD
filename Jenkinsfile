@@ -1,35 +1,16 @@
 pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/leonelmctk/NodeJS-CI-CD.git'
-            }
+    agent {
+        docker {
+            image 'node:latest'
+            args '-u root:root' // Asegúrate de tener permisos necesarios
         }
+    }
+    stages {
         stage('Install Dependencies') {
             steps {
-                script {
-                    echo 'Installing dependencies...'
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
-        stage('Run Tests') {
-            steps {
-                script {
-                    echo 'Running tests...'
-                    sh 'npm test'
-                }
-            }
-        }
-        stage('Build') {
-            steps {
-                script {
-                    echo 'Building the application...'
-                    // Aquí puedes agregar pasos de construcción como `npm run build`
-                    sh 'npm run build' // Suponiendo que tu proyecto use npm para build
-                }
-            }
-        }
-    } // Cierre del bloque 'stages'
-} // Cierre del bloque 'pipeline'
+        // Otras etapas...
+    }
+}
