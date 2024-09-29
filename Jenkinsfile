@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-               git 'https://github.com/leonelmctk/NodeJS-CI-CD.git'   
+               git 'https://github.com/leonelmctk/NodeJS-CI-CD/blob/main/Jenkinsfile'   
             }
         }
         stage('Install Dependencies') {
